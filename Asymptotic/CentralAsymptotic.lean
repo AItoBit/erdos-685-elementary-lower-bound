@@ -51,6 +51,7 @@ theorem tendsto_omega_centralBinom :
   · filter_upwards [eventually_ge_atTop 2] with n hn
     have hnpos : (0 : ℝ) < n := by exact_mod_cast (show 0 < n by omega)
     have hlpos : 0 ≤ Real.log (n : ℝ) := Real.log_nonneg (by exact_mod_cast (show 1 ≤ n by omega))
+    have hn1 : (1 : ℝ) < n := by exact_mod_cast (show 1 < n by omega)
     have h2pos : 0 < Real.log (2 * (n : ℝ)) := Real.log_pos (by linarith)
     have hbpos : (0 : ℝ) < Nat.centralBinom n := by exact_mod_cast Nat.centralBinom_pos n
     have hpow : (Nat.centralBinom n : ℝ) ≤

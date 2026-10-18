@@ -10,7 +10,7 @@ noncomputable def cutoff (n : ℕ) : ℝ := (n : ℝ) / Real.log n ^ 2
 
 theorem tendsto_log_nat_div_nat :
     Tendsto (fun n : ℕ => Real.log n / (n : ℝ)) atTop (𝓝 0) := by
-  simpa using (Real.tendsto_pow_log_div_mul_add_atTop 1 0 1 one_ne_zero).comp
+  simpa [Function.comp_def] using (Real.tendsto_pow_log_div_mul_add_atTop 1 0 1 one_ne_zero).comp
     tendsto_natCast_atTop_atTop
 
 theorem tendsto_log_nat : Tendsto (fun n : ℕ => Real.log n) atTop atTop :=
@@ -18,12 +18,12 @@ theorem tendsto_log_nat : Tendsto (fun n : ℕ => Real.log n) atTop atTop :=
 
 theorem tendsto_loglog_div_log :
     Tendsto (fun n : ℕ => Real.log (Real.log n) / Real.log n) atTop (𝓝 0) := by
-  simpa using (Real.tendsto_pow_log_div_mul_add_atTop 1 0 1 one_ne_zero).comp
+  simpa [Function.comp_def] using (Real.tendsto_pow_log_div_mul_add_atTop 1 0 1 one_ne_zero).comp
     tendsto_log_nat
 
 theorem eventually_one_lt_cutoff : ∀ᶠ n : ℕ in atTop, 1 < cutoff n := by
   have h : Tendsto (fun n : ℕ => Real.log n ^ 2 / (n : ℝ)) atTop (𝓝 0) := by
-    simpa using (Real.tendsto_pow_log_div_mul_add_atTop 1 0 2 one_ne_zero).comp
+    simpa [Function.comp_def] using (Real.tendsto_pow_log_div_mul_add_atTop 1 0 2 one_ne_zero).comp
       tendsto_natCast_atTop_atTop
   filter_upwards [h.eventually (gt_mem_nhds (by norm_num : (0 : ℝ) < 1)),
     eventually_gt_atTop 1] with n hn hn1
@@ -44,7 +44,6 @@ theorem tendsto_cutoff_add_one_mul_log_div :
   have hl0 : Real.log (n : ℝ) ≠ 0 := (Real.log_pos (by exact_mod_cast hn)).ne'
   dsimp [cutoff]
   field_simp [hn0, hl0]
-  <;> ring
 
 theorem tendsto_log_div_log_cutoff :
     Tendsto (fun n : ℕ => Real.log n / Real.log (cutoff n)) atTop (𝓝 1) := by
@@ -62,6 +61,7 @@ theorem tendsto_log_div_log_cutoff :
       (Real.log n - 2 * Real.log (Real.log n)) / Real.log n := by
     field_simp [hlpos.ne']
   rw [heq, inv_div]
+  norm_num
 
 theorem tendsto_log_div_log_two_mul :
     Tendsto (fun n : ℕ => Real.log n / Real.log (2 * (n : ℝ))) atTop (𝓝 1) := by

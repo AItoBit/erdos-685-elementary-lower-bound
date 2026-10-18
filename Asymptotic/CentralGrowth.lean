@@ -1,9 +1,7 @@
 import Mathlib.Data.Nat.Choose.Central
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
-import Mathlib.Tactic.FieldSimp
 import Mathlib.Tactic.Positivity
 import Mathlib.Tactic.NormNum
-import Mathlib.Tactic.NormCast
 
 open Filter Real
 open scoped Topology
@@ -16,7 +14,7 @@ theorem tendsto_log_centralBinom_div :
       atTop (𝓝 (Real.log 4)) := by
   have hnat : Tendsto (fun n : ℕ => (n : ℝ)) atTop atTop := tendsto_natCast_atTop_atTop
   have hlog : Tendsto (fun n : ℕ => Real.log (n : ℝ) / (n : ℝ)) atTop (𝓝 0) := by
-    simpa using (Real.tendsto_pow_log_div_mul_add_atTop 1 0 1 one_ne_zero).comp hnat
+    simpa [Function.comp_def] using (Real.tendsto_pow_log_div_mul_add_atTop 1 0 1 one_ne_zero).comp hnat
   have hlo : Tendsto (fun n : ℕ => Real.log 4 - Real.log (n : ℝ) / (n : ℝ))
       atTop (𝓝 (Real.log 4)) := by
     simpa using tendsto_const_nhds.sub hlog
@@ -30,7 +28,9 @@ theorem tendsto_log_centralBinom_div :
     rw [Real.log_pow, Real.log_mul hnpos.ne' hcb.ne'] at h
     apply (le_div_iff₀ hnpos).mpr
     have heq : (Real.log 4 - Real.log (n : ℝ) / (n : ℝ)) * (n : ℝ) =
-        (n : ℝ) * Real.log 4 - Real.log (n : ℝ) := by field_simp [hnpos.ne']; ring
+        (n : ℝ) * Real.log 4 - Real.log (n : ℝ) := by
+      rw [sub_mul, div_mul_cancel₀ _ hnpos.ne']
+      ring
     rw [heq]
     linarith
   · filter_upwards [eventually_ge_atTop 4] with n hn
@@ -61,6 +61,8 @@ theorem tendsto_log_two_mul_div_log :
   ring
 
 end Erdos685Research
+
+
 
 
 

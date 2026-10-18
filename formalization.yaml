@@ -26,9 +26,13 @@ sources:
       Conjectures. No novel mathematical result is claimed.
 status:
   scope: >-
-    Complete proof candidate for the finite elementary lower bound only;
-    compiler and axiom checks are pending. The main uniform asymptotics
+    Complete proof of the finite elementary lower bound only. The strict build
+    and final axiom audit passed in CI run 39102781308 at commit
+    274c39e15184b9f8f9a022087f03726b701bed19. The main uniform asymptotics
     remain unresolved by this development.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: [propext, Classical.choice, Quot.sound]
 automation:
   methods:
     - method: agent

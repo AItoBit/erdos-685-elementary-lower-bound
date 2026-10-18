@@ -1,0 +1,31 @@
+VERIFICATION — 18 October 2026
+
+Scope: the known finite non-strict logarithmic lower bound, not either main
+uniform asymptotic question in Erdos problem 685.
+
+Lean 4.35.0-rc2
+Mathlib 065356127b1dc0016f66b7283ce0ce2c4055aa55
+Verified Lean source commit 274c39e15184b9f8f9a022087f03726b701bed19
+CI https://github.com/AItoBit/erdos-685-elementary-lower-bound/actions/runs/39102781308
+Result: SUCCESS, lake --wfail build Solution Challenge.
+
+The final #check and axiom audit reported:
+Erdos685.trivial_lower_bound (n k : Nat) (hk0 : 0 < k) (hkn : k < n) :
+  Real.log (n.choose k : Real) / Real.log (n : Real) <=
+    (ArithmeticFunction.cardDistinctFactors (n.choose k) : Real)
+'Erdos685.trivial_lower_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+Mathlib API types were confirmed by #check in the same audit. The solution
+closure contains no proof holes, new mathematical axioms, unsafe proofs or
+native_decide. Challenge contains one deliberate comparison hole and is not
+imported by Solution. Later documentation-only commits retain this checked
+Lean source; CI checks the final package snapshot separately.
+
+An independent agent compared the original source, existing repository type
+and proof. Equality n=2,k=1 requires the non-strict inequality. Both main
+uniform asymptotic questions remain open and are outside this proof.
+
+The local baseline attempt failed to read an existing compiler artifact.
+No successful local compile is claimed. Hosted CI is the verification evidence.
+Complete Palomar mechanical reports, editorial review and registration are
+separate events; this record does not claim their completion.

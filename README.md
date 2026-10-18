@@ -1,6 +1,6 @@
 # Elementary lower bound for Erdős problem 685
 
-Candidate verification package for the known finite bound
+Verified proof package for the known finite bound
 
 `log (n.choose k) / log n ≤ ω (n.choose k)` for `0 < k < n`.
 
@@ -24,7 +24,7 @@ lake exe cache get
 lake --wfail build Solution Challenge
 ```
 
-Build and axiom audits are pending. `Challenge.lean` has one deliberate
+The strict build and final axiom audit passed in [CI run 39102781308](https://github.com/AItoBit/erdos-685-elementary-lower-bound/actions/runs/39102781308). `Challenge.lean` has one deliberate
 comparison hole and is not imported by Solution. The proved solution may use
 only `propext`, `Classical.choice`, and `Quot.sound`.
 
@@ -35,3 +35,8 @@ No manual human proof generation or human expert review is claimed.
 Source: Paul Erdős, *Some unconventional problems in number theory*, Acta
 Math. Acad. Sci. Hungar. 33 (1979), 71–80, page 77, equation (9),
 [DOI](https://doi.org/10.1007/BF01903382).
+
+The source audit screened three of four discovered works and records one
+full-text reading and one finite-proof source. Its arXiv subset has one
+screened work and no full-text readings. The 100-paper research campaign is
+incomplete. See SOURCES.md and the corpus audit for exact reading limits.

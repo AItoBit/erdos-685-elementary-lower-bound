@@ -1,174 +1,21 @@
-ERDOS 685: EXACT STATEMENT AND REPOSITORY AUDIT
-18 October 2026 (Europe/Paris)
+INDEPENDENT STATEMENT AND MATHEMATICAL AUDIT
+18 October 2026
 
-Reading scope
-Fully visually read both supplied PDF page images, page-1.png and page-2.png.
-Read the complete current upstream FormalConjectures/ErdosProblems/685.lean
-through the GitHub contents API, and the full PR #6824 description. No local
-compiler was started. No paper proof or full solution is certified here.
+The complete proof concerns only the already stated textbook lower bound:
+for natural 0<k<n, log(choose(n,k))/log(n) <= omega(choose(n,k)).
+Omega here denotes the number of DISTINCT prime divisors, Mathlib's
+ArithmeticFunction.cardDistinctFactors, not the multiplicity count.
 
-Repository status: do not add a duplicate problem file
-The local working checkout has no 685.lean, but upstream already does.
-PR #6824, feat(ErdosProblems/685): add Erdos Problem 685, was MERGED on
-2026-10-10 at 23:52:36 UTC, merge commit
-9cf29323ff74a2292d32006e9e3fdf23d4cf6dd2.
-https://github.com/google-deepmind/formal-conjectures/pull/6824
-Issue #878 is CLOSED. All-state PR search for 685 also returns unrelated
-PR #685 about completeness in another problem. The current upstream source is
-https://github.com/google-deepmind/formal-conjectures/blob/main/FormalConjectures/ErdosProblems/685.lean
-A new statement-only PR reproducing this file would be a duplicate.
+The domain forces n>=2, hence log(n)>0 and choose(n,k)>0. Every full prime-power
+block is <=n by Nat.pow_factorization_choose_le. Product reconstruction gives
+choose(n,k)<=n^omega(choose(n,k)); log monotonicity and log_pow yield the claim.
+There are no additional hypotheses or mathematical assumptions.
 
-Exact modern question
-For each fixed epsilon>0, and uniformly for all natural k satisfying
-  n^epsilon < k <= n^(1-epsilon),
-ask whether omega(choose(n,k)) is asymptotic to
-  k * sum_{prime p, k<p<n} 1/p
-as n tends to infinity. Here omega counts DISTINCT prime factors. Both
-prime-sum endpoints are strict. Multiplicities must not be counted.
+The original Erdos source prints a strict inequality, but n=2,k=1 gives equality.
+The non-strict version agrees exactly with the existing Formal Conjectures
+textbook statement. Source correspondence and the finite argument passed an
+independent agent audit. No human expert review is claimed.
 
-The precise relative-error formulation is:
-for every epsilon>0 and delta>0, there is a threshold N(epsilon,delta)
-such that for every n>=N and every k in that interval,
-  abs(omega(choose(n,k)) - k*primeRecipSum(k,n))
-    <= delta * (k*primeRecipSum(k,n)).
-This is uniform in k: the threshold is chosen before k. A statement allowing
-N to depend on k would be weaker and would not express the displayed o(1).
-The existing parts.i has exactly this epsilon,delta,eventual-n,forall-k order.
-Its powers are real powers of the natural n cast to Real, as intended.
-
-For epsilon>=1/2 the first interval is eventually empty. This is harmless:
-the universal quantifier also includes all fixed epsilon in (0,1/2), where
-the substantive claim lies. Restricting epsilon to that interval is an
-optional equivalent presentation, not a needed repair.
-
-Logarithmic extension
-The source's second question asks whether even k >= (log n)^c is possible.
-Read as replacing the lower endpoint while retaining k<=n^(1-epsilon), the
-natural strongest interpretation is: there is ONE absolute c>0 such that,
-for every epsilon>0 and delta>0, eventually every n satisfies the same
-relative-error bound for every k with
-  (log n)^c <= k <= n^(1-epsilon).
-The existing parts.ii has exactly these quantifiers. In particular c occurs
-before epsilon and delta. The PR explicitly discloses that interpretation;
-the terse source alone does not spell out all dependencies.
-
-The upper endpoint must not be silently dropped. For k=n-1 and any prime
-n>=3, choose(n,k)=n has omega=1, whereas there is no prime strictly between
-k and n, so the proposed main term is zero. The relative-error statement
-then demands 1<=0. Such n are arbitrarily large, and k=n-1 eventually
-exceeds (log n)^c for each fixed c. Thus a literal unrestricted all-k
-logarithmic extension is false. The existing upper bound is mathematically
-necessary to its intended version.
-
-Boundary and definition checks
-The upstream definition primeRecipSum uses (Finset.Ioo k n).filter Nat.Prime
-and the summand (1:Real)/p. Thus the endpoints and natural-to-real cast agree
-with the PDF. Its test primeRecipSum 2 5 = 1/3 explicitly checks both ends.
-No zero denominator occurs in a retained summand because every p is prime.
-For every fixed substantive epsilon and sufficiently large n, the main
-interval has k>0 and k<n. Thus choose(n,k) is positive; natural factorization
-of choose(n,k)=0 outside its natural domain is not exploited. The same
-holds in the logarithmic extension because c>0 and epsilon>0 are fixed.
-Zero main terms at small inputs do not cause a problem under eventual n.
-
-Textbook variant and a possible nonduplicate contribution
-The PDF says the trivial lower bound is strictly greater than
-  log(choose(n,k))/log n.
-The upstream file correctly states greater than or equal, for 0<k<n.
-Equality already holds at n=2,k=1, and more generally when k=1 and n is a
-prime power. Hence changing upstream's >= to the source's literal > would
-introduce a false statement. Its domain implies n>=2 and log n>0.
-
-The existing textbook theorem is still by sorry. A useful nonduplicate
-contribution could prove THAT theorem, without asserting the main question.
-A direct route already has a Mathlib API:
-  Nat.pow_factorization_choose_le (hn : 0<n):
-    p^((n.choose k).factorization p) <= n.
-This was inspected in Mathlib/Data/Nat/Choose/Factorization.lean, not merely
-inferred from its name. Multiply this inequality over the distinct prime
-factors, reconstruct choose(n,k) with
-Nat.prod_primeFactors_pow_factorization, and identify the cardinality with
-ArithmeticFunction.cardDistinctFactors. This gives
-choose(n,k) <= n^(omega(choose(n,k))). Taking logs and dividing by log n>0
-proves the existing textbook statement. This is a proposed proof route,
-not a compiled proof, and it is not a full solution of problem 685.
-A PR would be justified only after such a proof is completed and verified,
-or if a separate independently demonstrated actual upstream error is found.
-
-Forum comments are not a solution certificate
-The second PDF image contains a tentative smooth-number-method observation
-claiming an upper subrange n^(17/30+delta)<=k<=n^(1-delta), with a uniform
-error depending on delta. The author says it seems to give this and has
-not found the specific subrange written explicitly. Subsequent comments
-ask for corrected notation and the Younis paper link. The displayed page
-has zero proof claims and zero proof expositions. This is an interesting
-research lead, not evidence that the entire stated range or logarithmic
-extension is proved. Any solved-subrange claim needs the exact primary
-Younis theorem, parameter translation and a complete argument.
-
-Recommendation
-Do not open another statement-only 685 PR. Preserve the two main conjectures
-as research open. Investigate the textbook lower-bound proof as a focused
-possible contribution; do not equate that proof or the tentative forum
-subrange with a full solution. Any proof work can remain external with an
-appropriate stable formal_proof link if it exceeds repository length policy.
-
-SECOND-KEY AUDIT OF research/erdos685/Lower.lean
-Read the complete root-written Lower.lean independently, without editing it
-or starting a compiler. The finite lemma choose_le_pow_omega has exactly the
-hypotheses 0<n and k<=n and the conclusion
-  choose(n,k) <= n^(omega(choose(n,k))).
-For k=0 or k=n it gives 1<=1, as it should. Product reconstruction is applied
-to a nonzero binomial coefficient, justified by k<=n. Every prime-power
-block is bounded by n using the inspected Mathlib theorem, and the product
-is indexed by distinct prime factors. It does not confuse total and distinct
-factor counts. Raising n to omega is therefore the right comparison.
-
-The final trivial_lower_bound takes n,k, 0<k and k<n and concludes exactly
-the existing upstream textbook inequality. These hypotheses imply n>=2,
-choose(n,k)>0 and log n>0. Taking logs preserves the finite inequality,
-Real.log_pow gives omega*log n, and division by the positive log n yields
-the desired statement. No extra analytic or distribution hypothesis survives.
-No sorry, custom axiom, or native-evaluation escape appears in the inspected
-proof source. Actual axiom output and compilation are separate root checks.
-The source statement and two theorem types can be frozen: no mathematical
-change is requested by this independent review.
-
-Primary-original check
-Opened the primary scan of Erdos, Some unconventional problems in number
-theory, Acta Math. Acad. Sci. Hungar. 33 (1979), 71-80:
-https://users.renyi.hu/~p_erdos/1979-23.pdf
-Its printed p.77, equation (9), extracted text explicitly has the strict
-inequality > log(choose(n,k))/log n; the independently saved local original
-text research/erdos663/erdos1979-23.txt agrees. I did not obtain a usable
-visual screenshot of this primary page, so this is a primary-text check,
-not a claim to have visually read all ten pages. Equality at n=2,k=1
-already rules out an unrestricted strict version on the upstream domain.
-More generally k=1 and prime-power n give equality. The proved non-strict
-form matches upstream's intentional and documented correction.
-
-Exact contribution scope
-A verified Lower.lean would provide a complete proof of the ALREADY STATED
-TEXTBOOK LOWER BOUND. It would not settle either main asymptotic question,
-prove the uniform smooth-number subrange, or justify marking problem 685
-research solved. An appropriate PR can fill the existing textbook placeholder
-or link this exact theorem, while leaving both open parts unchanged.
-
-PREPARED REPOSITORY CHANGE
-Prepared only FormalConjectures/ErdosProblems/685.lean in managed worktree
-C:/Users/Usuario/.codex/worktrees/erdos-685-lower-bound/formal-conjectures.
-Read that worktree's AGENTS.md, PROOFS.md and ErdősProblems README before
-editing; the CONTRIBUTING/STATEMENTS conventions were read in the preceding
-same-repository audits and followed here.
-
-The exact diff replaces the single sorry in
-Erdos685.erdos_685.variants.trivial_lower_bound with 18 proof lines. It locally
-proves choose(n,k)<=n^omega(choose(n,k)), then takes logarithms and divides
-by positive log n. It adds no new public definition, theorem, import or
-formal_proof attribute, and changes no theorem type, category or docstring.
-Both main open asymptotic statements are byte-for-byte untouched. The short
-inline proof follows the already independently audited root Lower.lean.
-
-Read-only git diff --check passed. The diff summary is one file, 18 insertions
-and one deletion. No local compiler was started; hosted proof CI and scoped
-repository CI remain required before a verified-build claim.
+The two main asymptotic questions are separate and remain unproved here.
+The existing polynomial and polylogarithmic range statements were not changed.
+Compiler and axiom evidence is recorded separately in VERIFICATION.txt.

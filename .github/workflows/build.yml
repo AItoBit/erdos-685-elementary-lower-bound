@@ -17,6 +17,8 @@ jobs:
           cat > .lake/Audit.lean <<'LEAN'
           module
           import Solution
+          #check Nat.pow_factorization_choose_le
+          #check Nat.prod_primeFactors_pow_factorization
           #check Erdos685.trivial_lower_bound
           #print axioms Erdos685.trivial_lower_bound
           LEAN

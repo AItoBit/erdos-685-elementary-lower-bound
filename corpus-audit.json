@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "audit_date": "2026-10-18",
+  "scope": "Focused source audit for Erdos 685; not a completed broad research campaign",
+  "all_works": {
+    "discovered": 4,
+    "screened": 3,
+    "full_text_reviewed": 1,
+    "used_in_finite_lean_proof": 1
+  },
+  "arxiv_works": {
+    "discovered": 1,
+    "screened": 1,
+    "full_text_reviewed": 0,
+    "used_in_finite_lean_proof": 0
+  },
+  "additional_use": {
+    "younis_used_in_informal_partial_corollary": true,
+    "weatherhead_imported": false
+  },
+  "counting_rules": [
+    "Discovery includes bibliography-only identification.",
+    "Screening requires primary content or relevant theorem/source inspection.",
+    "Full reading requires the entire work, not download or selected sections.",
+    "The original Erdos full extracted-text reading is reused from the preceding audit and counted once.",
+    "Used-in-proof counts here refer to the candidate finite Lean lower-bound result, not the informal Younis corollary."
+  ],
+  "quota": {
+    "required_papers": 100,
+    "satisfied": false,
+    "shortfall_discovered": 96,
+    "campaign_complete": false
+  },
+  "reading_limits": [
+    "Younis pages1-3 of30 only.",
+    "Weatherhead paper sections1 and6,README,trustboundary and selectedLean excerpts only.",
+    "EGK original bibliography only."
+  ],
+  "claim_status_file": "CLAIM_STATUS.md"
+}

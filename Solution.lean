@@ -28,7 +28,7 @@ namespace Erdos685
 theorem choose_le_pow_omega {n k : ℕ} (hn : 0 < n) (hk : k ≤ n) :
     n.choose k ≤ n ^ (ω (n.choose k)) := by
   have hc : (n.choose k).primeFactors.card = ω (n.choose k) := by
-    simp [Nat.primeFactors, List.card_toFinset, ArithmeticFunction.cardDistinctFactors_apply]
+    simp only [Nat.primeFactors, List.card_toFinset, ArithmeticFunction.cardDistinctFactors_apply]
   calc
     n.choose k = ∏ p ∈ (n.choose k).primeFactors,
         p ^ (n.choose k).factorization p := Nat.prod_primeFactors_pow_factorization (Nat.choose_ne_zero hk)

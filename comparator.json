@@ -1,8 +1,8 @@
 {
   "challenge_module": "Challenge",
-  "solution_module": "Solution",
+  "solution_module": "Asymptotic",
   "theorem_names": [
-    "Erdos685.trivial_lower_bound"
+    "Erdos685Research.tendsto_omega_centralBinom"
   ],
   "definition_names": [],
   "permitted_axioms": [

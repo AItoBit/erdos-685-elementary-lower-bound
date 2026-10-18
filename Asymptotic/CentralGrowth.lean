@@ -1,3 +1,8 @@
+/-
+Copyright 2026 AItoBit.
+Licensed under the Apache License, Version 2.0. See LICENSE.
+-/
+
 import Mathlib.Data.Nat.Choose.Central
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
 import Mathlib.Tactic.Positivity
@@ -43,28 +48,4 @@ theorem tendsto_log_centralBinom_div :
     apply (div_le_iff₀ hnpos).mpr
     nlinarith
 
-/-- Multiplication of the argument by two does not change logarithmic scale. -/
-theorem tendsto_log_two_mul_div_log :
-    Tendsto (fun n : ℕ => Real.log (2 * (n : ℝ)) / Real.log (n : ℝ))
-      atTop (𝓝 1) := by
-  have hnat : Tendsto (fun n : ℕ => (n : ℝ)) atTop atTop := tendsto_natCast_atTop_atTop
-  have hsmall : Tendsto (fun n : ℕ => Real.log 2 / Real.log (n : ℝ)) atTop (𝓝 0) :=
-    tendsto_const_nhds.div_atTop (Real.tendsto_log_atTop.comp hnat)
-  have h : Tendsto (fun n : ℕ => 1 + Real.log 2 / Real.log (n : ℝ)) atTop (𝓝 1) := by
-    simpa using tendsto_const_nhds.add hsmall
-  apply Tendsto.congr' (f₁ := fun n : ℕ => 1 + Real.log 2 / Real.log (n : ℝ)) ?_ (by simpa using h)
-  filter_upwards [eventually_ge_atTop 2] with n hn
-  have hn1 : (1 : ℝ) < n := by exact_mod_cast (show 1 < n by omega)
-  have hnpos : (0 : ℝ) < n := lt_trans zero_lt_one hn1
-  rw [Real.log_mul (by norm_num : (2 : ℝ) ≠ 0) hnpos.ne', add_div]
-  rw [div_self (Real.log_pos hn1).ne']
-  ring
-
 end Erdos685Research
-
-
-
-
-
-
-

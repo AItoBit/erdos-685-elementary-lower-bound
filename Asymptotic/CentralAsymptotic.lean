@@ -1,6 +1,12 @@
+/-
+Copyright 2026 AItoBit.
+Licensed under the Apache License, Version 2.0. See LICENSE.
+-/
+
 import Asymptotic.CentralGrowth
 import Asymptotic.PrimeCutoff
 import Asymptotic.LogCutoff
+import Solution
 import Mathlib.Data.Nat.Choose.Factorization
 import Mathlib.NumberTheory.ArithmeticFunction.Misc
 import Mathlib.Algebra.Order.BigOperators.Group.Finset
@@ -18,20 +24,6 @@ open Filter Real Finset
 open scoped Topology ArithmeticFunction.omega
 
 namespace Erdos685Research
-
-/-- The prime-power bound gives the finite lower estimate used in the squeeze. -/
-theorem choose_le_pow_distinct {n k : ℕ} (hn : 0 < n) (hk : k ≤ n) :
-    n.choose k ≤ n ^ (ω (n.choose k)) := by
-  have hc : (n.choose k).primeFactors.card = ω (n.choose k) := by
-    simp only [Nat.primeFactors, List.card_toFinset,
-      ArithmeticFunction.cardDistinctFactors_apply]
-  calc
-    n.choose k = ∏ p ∈ (n.choose k).primeFactors,
-        p ^ (n.choose k).factorization p :=
-      Nat.prod_primeFactors_pow_factorization (Nat.choose_ne_zero hk)
-    _ ≤ ∏ _p ∈ (n.choose k).primeFactors, n :=
-      Finset.prod_le_prod fun _ _ => Nat.pow_factorization_choose_le hn
-    _ = n ^ (ω (n.choose k)) := by simp [hc]
 
 /-- The classical central-binomial asymptotic for the number of distinct prime divisors. -/
 theorem tendsto_omega_centralBinom :
@@ -57,7 +49,7 @@ theorem tendsto_omega_centralBinom :
     have hpow : (Nat.centralBinom n : ℝ) ≤
         (2 * (n : ℝ)) ^ (ω (Nat.centralBinom n)) := by
       rw [Nat.centralBinom_eq_two_mul_choose]
-      exact_mod_cast choose_le_pow_distinct (by omega : 0 < 2 * n) (by omega : n ≤ 2 * n)
+      exact_mod_cast Erdos685.choose_le_pow_omega (by omega : 0 < 2 * n) (by omega : n ≤ 2 * n)
     have hlog := Real.log_le_log hbpos hpow
     rw [Real.log_pow] at hlog
     have hlow : Real.log (Nat.centralBinom n : ℝ) / Real.log (2 * (n : ℝ)) ≤

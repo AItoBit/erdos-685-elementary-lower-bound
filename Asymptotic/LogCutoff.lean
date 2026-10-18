@@ -1,3 +1,8 @@
+/-
+Copyright 2026 AItoBit.
+Licensed under the Apache License, Version 2.0. See LICENSE.
+-/
+
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
 import Mathlib.Tactic
 

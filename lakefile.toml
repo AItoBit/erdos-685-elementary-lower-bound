@@ -1,6 +1,6 @@
 name = "erdos685"
 version = "0.1.0"
-defaultTargets = ["Solution"]
+defaultTargets = ["Solution", "Asymptotic"]
 
 [leanOptions]
 autoImplicit = false

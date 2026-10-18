@@ -1,68 +1,83 @@
 version: v0.4
 project:
-  name: Elementary lower bound for Erdos problem 685
-  description: >-
-    For natural numbers 0 < k < n, the logarithm of n choose k divided by
-    log n is at most its number of distinct prime divisors. Every prime-power
-    block of the binomial coefficient is at most n; multiplying these blocks
-    and taking logarithms proves the bound. This known elementary lemma does
-    not establish either uniform asymptotic conjecture in problem 685.
-  authors: [AItoBit]
-  responsible_maintainers: [AItoBit]
+  name: Distinct prime divisors of central binomial coefficients
+  description: A formal proof of the classical asymptotic omega(binomial(2n,n)) times log n
+    divided by n tending to log 4. The proof combines prime-power estimates, central-binomial
+    bounds, a prime-factor cutoff, and elementary logarithmic limits; it does not use the prime
+    number theorem. This strengthens the earlier finite lower-bound package to a full asymptotic
+    theorem. It does not solve the uniform conjecture in Erdos problem 685 and claims no new
+    mathematical theorem.
+  authors:
+  - AItoBit
+  responsible_maintainers:
+  - AItoBit
   license: Apache-2.0
 classification:
-  arxiv: [math.NT]
-  msc2020: [11B65, 11A51]
+  arxiv:
+  - math.NT
+  msc2020:
+  - 11B65
+  - 11A51
 sources:
-  - title: Some unconventional problems in number theory
-    authors: [Paul Erdos]
-    id: https://doi.org/10.1007/BF01903382
-    location: Acta Math. Acad. Sci. Hungar. 33 (1979), 71-80; page 77, equation (9)
-    type: article
-    relationship: adapts
-    note: >-
-      The source prints a strict inequality, but n=2 and k=1 give equality.
-      This package proves the non-strict inequality already stated by Formal
-      Conjectures. No novel mathematical result is claimed.
+- title: Binomial Coefficients and the Distribution of the Primes
+  authors:
+  - Triantafyllos Xylouris
+  id: https://arxiv.org/abs/0709.4676v1
+  location: Theorem 2, specialized to fixed parameters 2 and 1
+  type: article
+  relationship: formalizes
+  note: The paper attributes this asymptotic to Erdos (1979). This package proves its central-binomial
+    specialization. The implementation uses a logarithmic cutoff instead of the source's power
+    cutoff and uses elementary central-binomial bounds instead of Stirling's formula. The contribution
+    is a complete formalization of established mathematics.
+- title: Some unconventional problems in number theory
+  authors:
+  - Paul Erdos
+  id: https://doi.org/10.1007/BF01903382
+  location: Acta Math. Acad. Sci. Hungar. 33 (1979), 71-80; page 77
+  type: article
+  relationship: background
+  note: Source of the broader binomial-prime-factor discussion. The central family is outside
+    the sublinear range of the uniform conjecture. The ancillary finite lower bound uses a non-strict
+    inequality because the source's printed strict inequality has equality cases.
 related_formalizations:
-  - id: https://github.com/google-deepmind/formal-conjectures/blob/9cf29323ff74a2292d32006e9e3fdf23d4cf6dd2/FormalConjectures/ErdosProblems/685.lean
-    relationship: builds-on
-    note: >-
-      The Formal Conjectures Authors stated the non-strict bound as
-      Erdos685.erdos_685.variants.trivial_lower_bound, with a sorry proof,
-      in this Apache-2.0 module. The present package supplies a proof of
-      that bound as Erdos685.trivial_lower_bound using Mathlib's existing
-      prime-power estimate. It adds no proof of either asymptotic conjecture
-      and claims no new mathematics.
+- id: https://github.com/google-deepmind/formal-conjectures/blob/9cf29323ff74a2292d32006e9e3fdf23d4cf6dd2/FormalConjectures/ErdosProblems/685.lean
+  relationship: builds-on
+  note: The Formal Conjectures Authors stated the ancillary finite lower bound as Erdos685.erdos_685.variants.trivial_lower_bound
+    with a sorry proof in this Apache-2.0 module. The selected central-binomial limit is a different,
+    stronger classical theorem and is not asserted in that file.
+- id: https://github.com/AItoBit/erdos-685-elementary-lower-bound/tree/43f03b67f5bd9c8e181255af34f70c9abb4a5ad6
+  relationship: builds-on
+  note: Earlier version of this package proved only the elementary finite logarithmic lower
+    bound. Its prime-power product argument is reused as the lower half of the asymptotic squeeze.
+    The present version adds a prime-factor cutoff, logarithmic limit lemmas, and the central-binomial
+    asymptotic. The earlier private submission was withdrawn.
 status:
-  scope: >-
-    Complete proof of the finite elementary lower bound only. The strict build
-    and final axiom audit passed in CI run 39102781308 at commit
-    274c39e15184b9f8f9a022087f03726b701bed19. The main uniform asymptotics
-    remain unresolved by this development.
+  scope: Complete formalization of Erdos685Research.tendsto_omega_centralBinom. Strict hosted
+    build and exact final axiom audit passed at c78615e8145a281882ba4bc301750bb5c2e8ad35, CI
+    run 39118373536. Only propext, Classical.choice and Quot.sound occur. Neither uniform conjecture
+    in problem 685 is claimed.
   sorry_count: 0
   sorry_in_definitions: 0
-  axioms: [propext, Classical.choice, Quot.sound]
+  axioms:
+  - propext
+  - Classical.choice
+  - Quot.sound
 automation:
   methods:
-    - method: agent
-      framework: Codex desktop
-      tool_setup: >-
-        Codex agents generated the independent implementation, searched
-        Mathlib and audited the mathematical statement against the source.
-  notes: >-
-    AItoBit directed the task and confirmed human maintenance responsibility.
-    This attribution records direction and responsibility, not manual human
-    proof generation. No human expert review or source-author endorsement is claimed.
+  - method: agent
+    framework: Codex desktop
+    tool_setup: Codex agents investigated prior work, implemented the Lean proof, and independently
+      audited the exact source specialization and the complete mathematical argument.
+  notes: AItoBit directed the task and accepts maintenance responsibility. No manual human proof
+    generation or human expert review is claimed.
 review:
   status: agent-reviewed
-  notes: >-
-    A separate agent checked the finite product argument, positivity of log n,
-    equality cases and exact agreement with the existing textbook statement.
-    Build, axiom and registry verification must be reported separately.
+  notes: Separate agents checked source fidelity and the complete cutoff-and-squeeze proof,
+    including small inputs, positivity and the constant log 4. Compiler verification and registry
+    editorial acceptance are separate checks.
 fidelity:
-  divergences: >-
-    Uses a non-strict inequality because equality cases invalidate the printed
-    strict remark. Retains the existing Formal Conjectures hypotheses 0<k<n.
-    Does not claim the source's asymptotic-equality remark near the upper boundary
-    or any solution of the main uniform asymptotic conjectures.
+  divergences: Only the central specialization of the published proportional-binomial theorem
+    is selected. The exact target is the normalized limit with value log 4. The finite values
+    at n=0 and n=1 use Lean's total log and division; the proof uses eventual n>=4 bounds, so
+    these values do not affect the limit.

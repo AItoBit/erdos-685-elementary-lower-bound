@@ -3,26 +3,29 @@ Licensed under the Apache License, Version 2.0. See LICENSE.
 -/
 module
 
-public import Mathlib.Data.Nat.Choose.Factorization
+public import Mathlib.Data.Nat.Choose.Central
 public import Mathlib.NumberTheory.ArithmeticFunction.Misc
 public import Mathlib.Analysis.SpecialFunctions.Log.Basic
 
 /-!
-# An elementary bound associated with Erdos problem 685
+# Distinct prime divisors of central binomial coefficients
 
-This is the known finite logarithmic lower bound. The uniform pointwise
-asymptotics in the main problem are not asserted or proved here.
+Classical central specialization of Xylouris, arXiv:0709.4676v1,
+Theorem 2, attributed there to Erdos (1979). This does not assert the
+uniform sublinear conjecture in Erdos problem 685.
 -/
 
 @[expose] public section
 set_option warn.sorry false
-open Real
-open scoped ArithmeticFunction.omega
-namespace Erdos685
+open Filter
+open scoped Topology ArithmeticFunction.omega
+namespace Erdos685Research
 
-/-- The number of distinct prime divisors bounds the binomial logarithm. -/
-theorem trivial_lower_bound (n k : ℕ) (hk0 : 0 < k) (hkn : k < n) :
-    log (n.choose k : ℝ) / log (n : ℝ) ≤ (ω (n.choose k) : ℝ) := by
+/-- The number of distinct prime divisors of the central binomial coefficient
+is asymptotic to `log 4 * n / log n`. -/
+theorem tendsto_omega_centralBinom :
+    Tendsto (fun n : ℕ => (ω (Nat.centralBinom n) : ℝ) * Real.log n / (n : ℝ))
+      atTop (𝓝 (Real.log 4)) := by
   sorry
 
-end Erdos685
+end Erdos685Research

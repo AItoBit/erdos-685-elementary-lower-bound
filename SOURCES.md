@@ -1,3 +1,10 @@
+Historical audit of the earlier finite lower-bound package.
+The selected theorem is now the central-binomial asymptotic.
+See MATHEMATICS.md for the exact statement and source correspondence,
+VERIFICATION-CENTRAL.md for its proof evidence, and XYLOURIS_REVIEW.md
+for the new primary-source reading. Earlier pending-status statements
+below describe the earlier audit, not the current selected theorem.
+
 # Erdős 685: source and status audit
 
 Audit date: 18 October 2026. The supplied PDF is a two-page forum printout,

@@ -1,20 +1,20 @@
 {
-  "unique_valid_records": 4,
+  "unique_valid_records": 5,
   "cumulative_counts": {
-    "discovered": 4,
-    "screened": 3,
+    "discovered": 5,
+    "screened": 4,
+    "full_text_reviewed": 2,
+    "used_in_proof": 2
+  },
+  "arxiv_cumulative_counts": {
+    "discovered": 2,
+    "screened": 2,
     "full_text_reviewed": 1,
     "used_in_proof": 1
   },
-  "arxiv_cumulative_counts": {
-    "discovered": 1,
-    "screened": 1,
-    "full_text_reviewed": 0,
-    "used_in_proof": 0
-  },
   "minimum_reviewed": 100,
   "quota_scope": "all_unique_papers",
-  "remaining_to_minimum": 99,
+  "remaining_to_minimum": 98,
   "literature_complete": false,
   "errors": [],
   "qualification": "Recorded evidence only; actual reading, relevance, and theorem truth require review."

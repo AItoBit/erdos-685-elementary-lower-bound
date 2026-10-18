@@ -43,3 +43,7 @@ agents implemented the proof and performed independent mathematical/source
 audits. No manual human proof generation or human expert review is claimed.
 Broader literature coverage remains incomplete; this package makes no
 exhaustive literature-search or mathematical novelty claim.
+
+Recorded corpus: 5 discovered, 4 screened, 2 fully reviewed, 2 used in proof.
+The arXiv subset has counts 2 / 2 / 1 / 1. The broader 100-paper
+campaign remains incomplete; these counts do not certify novelty.

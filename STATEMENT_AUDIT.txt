@@ -1,3 +1,10 @@
+Historical audit of the earlier finite lower-bound package.
+The selected theorem is now the central-binomial asymptotic.
+See MATHEMATICS.md for the exact statement and source correspondence,
+VERIFICATION-CENTRAL.md for its proof evidence, and XYLOURIS_REVIEW.md
+for the new primary-source reading. Earlier pending-status statements
+below describe the earlier audit, not the current selected theorem.
+
 INDEPENDENT STATEMENT AND MATHEMATICAL AUDIT
 18 October 2026
 

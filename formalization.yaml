@@ -53,10 +53,10 @@ related_formalizations:
     The present version adds a prime-factor cutoff, logarithmic limit lemmas, and the central-binomial
     asymptotic. The earlier private submission was withdrawn.
 status:
-  scope: Complete formalization of Erdos685Research.tendsto_omega_centralBinom. Strict hosted
-    build and exact final axiom audit passed at c78615e8145a281882ba4bc301750bb5c2e8ad35, CI
-    run 39118373536. Only propext, Classical.choice and Quot.sound occur. Neither uniform conjecture
-    in problem 685 is claimed.
+  scope: Complete formalization of Erdos685Research.tendsto_omega_centralBinom. The final strict
+    build of Solution, Challenge and Asymptotic and final axiom audit passed at 2ef2575ee1092c7dc5bd6563b0b3cb75bb937ba5,
+    CI run 39118618563. Only propext, Classical.choice and Quot.sound occur. Subsequent changes
+    update documentation only. Neither uniform conjecture in problem 685 is claimed.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms:

@@ -33,8 +33,8 @@ lake exe cache get
 lake --wfail build Solution Challenge Asymptotic
 ```
 
-[Hosted proof and axiom audit](https://github.com/AItoBit/erdos-685-elementary-lower-bound/actions/runs/39118373536) passed at
-`c78615e8145a281882ba4bc301750bb5c2e8ad35`. The final theorem depends only on `propext`,
+[Hosted proof and axiom audit](https://github.com/AItoBit/erdos-685-elementary-lower-bound/actions/runs/39118618563) passed at
+`2ef2575ee1092c7dc5bd6563b0b3cb75bb937ba5`. The final theorem depends only on `propext`,
 `Classical.choice`, and `Quot.sound`. `Challenge.lean` contains the deliberate
 comparison hole and is never imported by the solution.
 

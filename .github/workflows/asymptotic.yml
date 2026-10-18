@@ -1,0 +1,24 @@
+name: Central binomial candidate
+on: [push, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    env:
+      LEAN_NUM_THREADS: 2
+    steps:
+      - uses: actions/checkout@v4
+      - uses: leanprover/lean-action@v1
+        with:
+          build-args: '--wfail Asymptotic'
+      - name: Inspect statement and axioms
+        run: |
+          cat > .lake/AsymptoticAudit.lean <<'LEAN'
+          import Asymptotic
+          #print Erdos685Research.tendsto_omega_centralBinom
+          #print axioms Erdos685Research.tendsto_omega_centralBinom
+          LEAN
+          lake env lean .lake/AsymptoticAudit.lean | tee asymptotic-axioms.txt
+          grep -F "'Erdos685Research.tendsto_omega_centralBinom' depends on axioms: [propext, Classical.choice, Quot.sound]" asymptotic-axioms.txt
+          ! grep -E 'sorryAx|trustCompiler|ofReduceBool' asymptotic-axioms.txt

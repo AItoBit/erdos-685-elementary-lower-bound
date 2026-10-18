@@ -2,11 +2,15 @@
 Copyright 2026 AItoBit.
 Licensed under the Apache License, Version 2.0. See LICENSE.
 -/
+module
 
-import Mathlib.Data.Nat.Factorization.Basic
-import Mathlib.Analysis.SpecialFunctions.Log.Basic
-import Mathlib.Algebra.Order.Floor.Ring
-import Mathlib.Tactic.Linarith
+
+public import Mathlib.Data.Nat.Factorization.Basic
+public import Mathlib.Analysis.SpecialFunctions.Log.Basic
+public import Mathlib.Algebra.Order.Floor.Ring
+public import Mathlib.Tactic.Linarith
+
+@[expose] public section
 
 open scoped BigOperators
 

@@ -2,14 +2,18 @@
 Copyright 2026 AItoBit.
 Licensed under the Apache License, Version 2.0. See LICENSE.
 -/
+module
 
-import Asymptotic.CentralGrowth
-import Asymptotic.PrimeCutoff
-import Asymptotic.LogCutoff
-import Solution
-import Mathlib.Data.Nat.Choose.Factorization
-import Mathlib.NumberTheory.ArithmeticFunction.Misc
-import Mathlib.Algebra.Order.BigOperators.Group.Finset
+
+public import Asymptotic.CentralGrowth
+public import Asymptotic.PrimeCutoff
+public import Asymptotic.LogCutoff
+public import Solution
+public import Mathlib.Data.Nat.Choose.Factorization
+public import Mathlib.NumberTheory.ArithmeticFunction.Misc
+public import Mathlib.Algebra.Order.BigOperators.Group.Finset
+
+@[expose] public section
 
 /-!
 # Distinct prime factors of central binomial coefficients

@@ -2,11 +2,15 @@
 Copyright 2026 AItoBit.
 Licensed under the Apache License, Version 2.0. See LICENSE.
 -/
+module
 
-import Mathlib.Data.Nat.Choose.Central
-import Mathlib.Analysis.SpecialFunctions.Log.Basic
-import Mathlib.Tactic.Positivity
-import Mathlib.Tactic.NormNum
+
+public import Mathlib.Data.Nat.Choose.Central
+public import Mathlib.Analysis.SpecialFunctions.Log.Basic
+public import Mathlib.Tactic.Positivity
+public import Mathlib.Tactic.NormNum
+
+@[expose] public section
 
 open Filter Real
 open scoped Topology

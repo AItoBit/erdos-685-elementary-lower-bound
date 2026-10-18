@@ -1,1 +1,3 @@
-import Asymptotic.CentralAsymptotic
+module
+
+public import Asymptotic.CentralAsymptotic

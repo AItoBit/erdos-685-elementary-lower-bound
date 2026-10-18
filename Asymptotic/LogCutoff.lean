@@ -2,9 +2,13 @@
 Copyright 2026 AItoBit.
 Licensed under the Apache License, Version 2.0. See LICENSE.
 -/
+module
 
-import Mathlib.Analysis.SpecialFunctions.Log.Basic
-import Mathlib.Tactic
+
+public import Mathlib.Analysis.SpecialFunctions.Log.Basic
+public import Mathlib.Tactic
+
+@[expose] public section
 
 open Filter Real
 open scoped Topology

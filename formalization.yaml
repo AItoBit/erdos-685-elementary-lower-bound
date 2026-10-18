@@ -24,6 +24,16 @@ sources:
       The source prints a strict inequality, but n=2 and k=1 give equality.
       This package proves the non-strict inequality already stated by Formal
       Conjectures. No novel mathematical result is claimed.
+related_formalizations:
+  - id: https://github.com/google-deepmind/formal-conjectures/blob/9cf29323ff74a2292d32006e9e3fdf23d4cf6dd2/FormalConjectures/ErdosProblems/685.lean
+    relationship: builds-on
+    note: >-
+      The Formal Conjectures Authors stated the non-strict bound as
+      Erdos685.erdos_685.variants.trivial_lower_bound, with a sorry proof,
+      in this Apache-2.0 module. The present package supplies a proof of
+      that bound as Erdos685.trivial_lower_bound using Mathlib's existing
+      prime-power estimate. It adds no proof of either asymptotic conjecture
+      and claims no new mathematics.
 status:
   scope: >-
     Complete proof of the finite elementary lower bound only. The strict build

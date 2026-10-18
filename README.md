@@ -7,8 +7,18 @@ Verified proof package for the known finite bound
 Here `ω` counts distinct prime divisors. The main uniform asymptotic
 conjectures remain open and are not proved by this theorem. No mathematical
 novelty is claimed. The intended contribution fills the existing textbook
-proof placeholder in Formal Conjectures, rather than duplicating its already
-merged statement formalization.
+proof placeholder in Formal Conjectures. The earlier statement is
+[`Erdos685.erdos_685.variants.trivial_lower_bound`](https://github.com/google-deepmind/formal-conjectures/blob/9cf29323ff74a2292d32006e9e3fdf23d4cf6dd2/FormalConjectures/ErdosProblems/685.lean),
+by The Formal Conjectures Authors, under Apache-2.0. At that revision its
+proof is `sorry`. This package proves the same bound as
+`Erdos685.trivial_lower_bound`; it adds no asymptotic result.
+
+Palomar's automated review dated 18 October 2026 reported that mechanical
+verification passed, but declined registration because this finite bound
+is a routine consequence of an existing prime-power estimate. The metadata
+now identifies the prior formalization. The research-interest objection
+remains unresolved: this package contains no substantive result beyond the
+elementary bound. See [REVIEW_RESPONSE.md](REVIEW_RESPONSE.md).
 
 Each full prime-power block in the binomial coefficient is at most `n`, by
 Mathlib's Kummer-based `Nat.pow_factorization_choose_le`. Multiplying the

@@ -55,8 +55,9 @@ related_formalizations:
 status:
   scope: Complete formalization of Erdos685Research.tendsto_omega_centralBinom. The final strict
     build of Solution, Challenge and Asymptotic and final axiom audit passed at 2ef2575ee1092c7dc5bd6563b0b3cb75bb937ba5,
-    CI run 39118618563. Only propext, Classical.choice and Quot.sound occur. Subsequent changes
-    update documentation only. Neither uniform conjecture in problem 685 is claimed.
+    CI run 39118618563. Only propext, Classical.choice and Quot.sound occur. Later changes
+    update documentation and module visibility without changing the mathematical statements
+    or proof arguments. Neither uniform conjecture in problem 685 is claimed.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms:

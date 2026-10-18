@@ -15,6 +15,7 @@ by separate agents. The target is Xylouris Theorem 2 with fixed parameters
 
 Local compilation was unavailable because Windows exhausted paging memory.
 This verification relies on the observed hosted run. The cleaned proof and selected Challenge passed the final strict build.
-Subsequent commits update documentation only; the Lean sources are identical
-to the verified revision. Exact-commit independent-kernel evidence belongs
-to the separate Palomar preflight report.
+Subsequent commits update documentation and explicit module visibility.
+The mathematical statements and proof arguments are unchanged. The final
+module package is checked separately by CI. Exact-commit independent-kernel
+evidence belongs to the separate Palomar preflight report.

@@ -1,0 +1,25 @@
+name: Lean proof
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    env:
+      LEAN_NUM_THREADS: 2
+    steps:
+      - uses: actions/checkout@v4
+      - uses: leanprover/lean-action@v1
+        with:
+          build-args: '--wfail Solution Challenge'
+      - name: Audit final theorem axioms
+        run: |
+          cat > .lake/Audit.lean <<'LEAN'
+          module
+          import Solution
+          #check Erdos685.trivial_lower_bound
+          #print axioms Erdos685.trivial_lower_bound
+          LEAN
+          lake env lean .lake/Audit.lean | tee axiom-report.txt
+          grep -F "'Erdos685.trivial_lower_bound' depends on axioms: [propext, Classical.choice, Quot.sound]" axiom-report.txt
+          ! grep -E 'sorryAx|trustCompiler|ofReduceBool' axiom-report.txt

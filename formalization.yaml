@@ -1,0 +1,54 @@
+version: v0.4
+project:
+  name: Elementary lower bound for Erdos problem 685
+  description: >-
+    For natural numbers 0 < k < n, the logarithm of n choose k divided by
+    log n is at most its number of distinct prime divisors. Every prime-power
+    block of the binomial coefficient is at most n; multiplying these blocks
+    and taking logarithms proves the bound. This known elementary lemma does
+    not establish either uniform asymptotic conjecture in problem 685.
+  authors: [AItoBit]
+  responsible_maintainers: [AItoBit]
+  license: Apache-2.0
+classification:
+  arxiv: [math.NT]
+  msc2020: [11B65, 11A51]
+sources:
+  - title: Some unconventional problems in number theory
+    authors: [Paul Erdos]
+    id: https://doi.org/10.1007/BF01903382
+    location: Acta Math. Acad. Sci. Hungar. 33 (1979), 71-80; page 77, equation (9)
+    type: article
+    relationship: adapts
+    note: >-
+      The source prints a strict inequality, but n=2 and k=1 give equality.
+      This package proves the non-strict inequality already stated by Formal
+      Conjectures. No novel mathematical result is claimed.
+status:
+  scope: >-
+    Complete proof candidate for the finite elementary lower bound only;
+    compiler and axiom checks are pending. The main uniform asymptotics
+    remain unresolved by this development.
+automation:
+  methods:
+    - method: agent
+      framework: Codex desktop
+      tool_setup: >-
+        Codex agents generated the independent implementation, searched
+        Mathlib and audited the mathematical statement against the source.
+  notes: >-
+    AItoBit directed the task and confirmed human maintenance responsibility.
+    This attribution records direction and responsibility, not manual human
+    proof generation. No human expert review or source-author endorsement is claimed.
+review:
+  status: agent-reviewed
+  notes: >-
+    A separate agent checked the finite product argument, positivity of log n,
+    equality cases and exact agreement with the existing textbook statement.
+    Build, axiom and registry verification must be reported separately.
+fidelity:
+  divergences: >-
+    Uses a non-strict inequality because equality cases invalidate the printed
+    strict remark. Retains the existing Formal Conjectures hypotheses 0<k<n.
+    Does not claim the source's asymptotic-equality remark near the upper boundary
+    or any solution of the main uniform asymptotic conjectures.
